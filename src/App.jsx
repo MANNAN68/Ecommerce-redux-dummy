@@ -16,9 +16,16 @@ import Product from "./pages/Product";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Dashboard from "./pages/Dashboard";
+import useAuthCheck from './hooks/useAuthCheck';
+import Register from './pages/Register';
+import ProductDetails from './pages/ProductDetails';
 
 const App = () => {
-  return (
+
+  const authChecked = useAuthCheck();
+  return !authChecked ? (
+    <div>Loading...</div>
+  ) : (
     <Router>
       <Routes>
         {/* Public Routes */}
@@ -40,10 +47,26 @@ const App = () => {
             }
           />
           <Route
-            path="/product/:id"
+            path="/register"
+            element={
+              <PublicRoute>
+                <Register />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/product"
             element={
               <PublicRoute>
                 <Product />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/product/:id"
+            element={
+              <PublicRoute>
+                <ProductDetails />
               </PublicRoute>
             }
           />

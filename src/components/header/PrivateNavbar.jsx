@@ -18,6 +18,7 @@ import {
 
 import Logo from '../../assets/logo.svg'
 import user from '../../assets/user.png'
+import { Link } from 'react-router-dom'
 
 const PrivateNavbar = () => {
     return (
@@ -26,7 +27,7 @@ const PrivateNavbar = () => {
                 <Navbar className='border-none'>
                     <NavbarContainer>
                         <NavbarBrand>
-                            <img src={Logo} alt="keep" className="w-[120px] h-[40px]" />
+                            <Link to='/'><img src={Logo} alt="keep" className="w-[120px] h-[40px]" /></Link>
                         </NavbarBrand>
                         <NavbarList>
                             <NavbarItem>Projects</NavbarItem>
