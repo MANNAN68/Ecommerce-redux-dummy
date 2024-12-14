@@ -35,9 +35,9 @@ const CSHeader = () => {
                     </NavbarBrand>
 
                     <NavbarList>
-                        <NavbarItem><Link to="/product">Shop</Link></NavbarItem>
-                        <NavbarItem>Research</NavbarItem>
-                        <NavbarItem>Contact</NavbarItem>
+                        <NavbarItem><Link to="/product">Products</Link></NavbarItem>
+                        <NavbarItem>Computer Accessories</NavbarItem>
+                        <NavbarItem>Jewellery</NavbarItem>
                     </NavbarList>
 
 
@@ -59,13 +59,13 @@ const CSHeader = () => {
                                 <DropdownAction asChild>
                                     <Avatar className="cursor-pointer">
                                         <AvatarImage src={user} />
-                                        <AvatarFallback>KR</AvatarFallback>
+                                        <AvatarFallback>Mannan</AvatarFallback>
                                     </Avatar>
                                 </DropdownAction>
                                 <DropdownContent align="end" className="border border-metal-100 dark:border-metal-800">
-                                    <DropdownItem>Statistics</DropdownItem>
-                                    <DropdownItem>Duplicate</DropdownItem>
-                                    <DropdownItem>Account</DropdownItem>
+                                    <DropdownItem>Profile</DropdownItem>
+                                    <DropdownItem>Orders</DropdownItem>
+                                    <DropdownItem>Review</DropdownItem>
                                     <DropdownItem>Logout</DropdownItem>
                                 </DropdownContent>
                             </Dropdown>
@@ -75,9 +75,9 @@ const CSHeader = () => {
                     <NavbarCollapseBtn />
 
                     <NavbarCollapse>
-                        <NavbarItem>Projects</NavbarItem>
-                        <NavbarItem>Research</NavbarItem>
-                        <NavbarItem>Contact</NavbarItem>
+                        <NavbarItem><Link to="/product">Products</Link></NavbarItem>
+                        <NavbarItem>Computer Accessories</NavbarItem>
+                        <NavbarItem>Jewellery</NavbarItem>
                     </NavbarCollapse>
                 </NavbarContainer>
             </Navbar>

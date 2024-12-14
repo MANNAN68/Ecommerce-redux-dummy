@@ -19,6 +19,7 @@ import Dashboard from "./pages/Dashboard";
 import useAuthCheck from './hooks/useAuthCheck';
 import Register from './pages/Register';
 import ProductDetails from './pages/ProductDetails';
+import NotFound from './pages/NotFound';
 
 const App = () => {
 
@@ -99,6 +100,8 @@ const App = () => {
             }
           />
         </Route>
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

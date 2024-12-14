@@ -2,6 +2,7 @@ import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle } fro
 import { useGetProductsQuery } from '../features/products/productApi'
 import { Image } from 'phosphor-react';
 import Error from '../components/ui/Error';
+import { Link } from 'react-router-dom';
 
 const Product = () => {
 
@@ -25,22 +26,25 @@ const Product = () => {
     if (!isLoading && !isError && products?.length > 0) {
         content = products.map((product) => (
             <div className="group relative" key={product.id}>
-                <img
-                    alt={product.title}
-                    src={product.thumbnail}
-                    className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80"
-                />
-                <div className="mt-4 flex justify-between">
-                    <div>
-                        <h3 className="text-sm text-gray-700">
-                            <a href="{product.href}">
-                                <span aria-hidden="true" className="absolute inset-0" />
+                <Link to={`/product/${product.id}`}>
+                    <img
+                        alt={product.title}
+                        src={product.thumbnail}
+                        className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80"
+                    />
+                    <div className="mt-4 flex justify-between">
+                        <div>
+                            <h3 className="text-sm text-gray-700">
                                 {product.title}
-                            </a>
-                        </h3>
-                        <p className="mt-1 text-sm text-gray-500">{product.brand}</p>
+                            </h3>
+                            <p className="mt-1 text-sm text-gray-500">{product.brand}</p>
+                        </div>
+                        <p className="text-sm font-medium text-gray-900">{product.price}</p>
                     </div>
-                    <p className="text-sm font-medium text-gray-900">{product.price}</p>
+                </Link>
+                <div className="mt-4 flex justify-between">
+                    <button type="button" className="text-sm font-medium text-white bg-indigo-500 px-4 py-2 rounded">Add to cart</button>
+                    <button type="button" className='text-sm font-medium text-indigo-600 hover:text-indigo-500'>Wishlist</button>
                 </div>
             </div>
         ));
