@@ -38,6 +38,7 @@ const CSHeader = () => {
                         <NavbarItem><Link to="/product">Products</Link></NavbarItem>
                         <NavbarItem>Computer Accessories</NavbarItem>
                         <NavbarItem>Jewellery</NavbarItem>
+                        <NavbarItem><Link to="/cart">Cart</Link> </NavbarItem>
                     </NavbarList>
 
 

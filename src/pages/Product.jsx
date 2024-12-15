@@ -1,18 +1,22 @@
-import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from 'keep-react'
+
 import { useGetProductsQuery } from '../features/products/productApi'
-import { Image } from 'phosphor-react';
 import Error from '../components/ui/Error';
 import { Link } from 'react-router-dom';
+import GlobalLoader from '../components/ui/GlobalLoader';
+import { useDispatch } from 'react-redux';
+import { addCart } from '../features/carts/cartSlice';
+
+
 
 const Product = () => {
-
+    const dispatch = useDispatch();
     const { data, isLoading, isError, error } = useGetProductsQuery();
 
     const products = data?.products || [];
     let content = null;
 
     if (isLoading) {
-        content = <p>Loading...</p>;
+        content = <GlobalLoader />;
     }
     if (!isLoading && isError) {
         content = <Error message={error.products} />;
@@ -43,21 +47,29 @@ const Product = () => {
                     </div>
                 </Link>
                 <div className="mt-4 flex justify-between">
-                    <button type="button" className="text-sm font-medium text-white bg-indigo-500 px-4 py-2 rounded">Add to cart</button>
+                    <button type="button" onClick={() => { addToCart(product) }} className="text-sm font-medium text-white bg-indigo-500 px-4 py-2 rounded">Add to cart</button>
                     <button type="button" className='text-sm font-medium text-indigo-600 hover:text-indigo-500'>Wishlist</button>
                 </div>
             </div>
         ));
     }
 
+    const addToCart = (product) => {
+        dispatch(addCart(product));
+        console.log("first", product);
 
+    }
 
     return (
-        <div className="bg-white">
-            <div className=" grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                {content}
+        <>
+
+            <div className="bg-white">
+                <div className=" grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                    {content}
+                </div>
             </div>
-        </div>
+        </>
+
     )
 }
 
