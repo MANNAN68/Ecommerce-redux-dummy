@@ -71,18 +71,19 @@ const App = () => {
               </PublicRoute>
             }
           />
+          <Route
+            path="/cart"
+            element={
+              <PublicRoute>
+                <Cart />
+              </PublicRoute>
+            }
+          />
         </Route>
 
         {/* Private Routes */}
         <Route element={<PrivateLayout />}>
-          <Route
-            path="/cart"
-            element={
-              <PrivateRoute>
-                <Cart />
-              </PrivateRoute>
-            }
-          />
+
           <Route
             path="/checkout"
             element={

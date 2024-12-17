@@ -56,8 +56,6 @@ const Product = () => {
 
     const addToCart = (product) => {
         dispatch(addCart(product));
-        console.log("first", product);
-
     }
 
     return (

@@ -1,17 +1,20 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import CartItem from '../components/cart/CartItem';
-import { calculateSubTotal, clearCart } from '../features/carts/cartSlice';
+import { calculateCartQty, calculateSubTotal, clearCart } from '../features/carts/cartSlice';
 
 const Cart = () => {
     const dispatch = useDispatch();
     const cartedItems = useSelector(state => state.cart.cartItems);
     const subTotal = useSelector(state => state.cart.cartTotalAmount);
+    const cartQty = useSelector(state => state.cart.cartTotalQuantity);
 
     useEffect(() => {
         dispatch(calculateSubTotal());
     }, [cartedItems, dispatch]);
-
+    useEffect(() => {
+        dispatch(calculateCartQty());
+    }, [cartedItems, dispatch]);
 
 
     return (
@@ -21,7 +24,7 @@ const Cart = () => {
                     <div className="w-3/4 bg-white px-10 py-10 dark:bg-gray-900">
                         <div className="flex justify-between border-b pb-8">
                             <h1 className="font-semibold text-2xl dark:text-white">Shopping Cart</h1>
-                            <h2 className="font-semibold text-2xl dark:text-white">3 Items</h2>
+
                         </div>
                         <div className="flex mt-10 mb-5 px-3 py-3">
                             <h3 className="font-semibold text-gray-600 text-xs uppercase w-2/5 dark:text-white">Product Details</h3>
@@ -51,7 +54,7 @@ const Cart = () => {
                     <div id="summary" className="w-1/4 px-8 py-10">
                         <h1 className="font-semibold text-2xl border-b pb-8 dark:text-white">Order Summary</h1>
                         <div className="flex justify-between mt-10 mb-5">
-                            <span className="font-semibold text-sm uppercase dark:text-white">Items 3</span>
+                            <span className="font-semibold text-sm uppercase dark:text-white">Items {cartQty}</span>
                             <span className="font-semibold text-sm dark:text-white">{subTotal}</span>
                         </div>
                         <div>
