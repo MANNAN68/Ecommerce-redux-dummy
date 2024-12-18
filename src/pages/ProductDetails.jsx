@@ -3,11 +3,16 @@ import { useParams } from 'react-router-dom';
 import { useGetSingleProductQuery } from '../features/products/productApi';
 import Error from '../components/ui/Error';
 import GlobalLoader from '../components/ui/GlobalLoader';
+import { useDispatch, useSelector } from 'react-redux';
+import { addCart } from '../features/carts/cartSlice';
 
 const ProductDetails = () => {
+    const dispatch = useDispatch();
     const { id } = useParams();
     const { data, isLoading, isError, error } = useGetSingleProductQuery(id);
     const [mainImage, setMainImage] = useState(null);
+    const cartItems = useSelector(state => state.cart.cartItems);
+    const isInCart = cartItems.some(item => item.id === data.id);
     useEffect(() => {
         if (data?.thumbnail) {
             setMainImage(data.thumbnail);
@@ -27,6 +32,11 @@ const ProductDetails = () => {
         content = <Error message="No products found" />;
     }
 
+    const handleAddToCart = (data) => {
+        if (!isInCart) {
+            dispatch(addCart(data));
+        }
+    }
 
     if (!isLoading && !isError && data?.id) {
         content = <div className="flex flex-col md:flex-row -mx-4">
@@ -85,9 +95,8 @@ const ProductDetails = () => {
 
                 <div className="flex -mx-2 mt-10">
                     <div className="w-1/2 px-2">
-                        <button className="w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700">
-                            Add to Cart
-                        </button>
+                        <button onClick={() => handleAddToCart(data)} className={`px-4 py-2 rounded-md ${isInCart ? "bg-gray-300 cursor-not-allowed opacity-50" : "bg-green-500 hover:bg-green-700 active:bg-green-800  text-white"}`}
+                            disabled={isInCart} >{isInCart ? "Already in Cart" : "Add to Cart"}</button>
                     </div>
                     <div className="w-1/2 px-2">
                         <button className="w-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white py-2 px-4 rounded-full font-bold hover:bg-gray-300 dark:hover:bg-gray-600">

@@ -35,7 +35,7 @@ const ProductCard = ({ product = {} }) => {
                 </div>
             </Link>
             <div className="mt-4 flex justify-between">
-                <button type="button" onClick={() => { handleAddToCart(product) }} className={`bg-indigo-500 rounded-md py-2 px-4 text-white ${isInCart ? "bg-gray-500" : "btn-primary"}`}
+                <button type="button" onClick={() => { handleAddToCart(product) }} className={`px-4 py-2 rounded-md ${isInCart ? "bg-gray-300 cursor-not-allowed opacity-50" : "bg-green-500 hover:bg-green-700 active:bg-green-800  text-white"}`}
                     disabled={isInCart} >{isInCart ? "Already in Cart" : "Add to Cart"}</button>
                 <button type="button" className='text-sm font-medium text-indigo-600 hover:text-indigo-500'>Wishlist</button>
             </div>
