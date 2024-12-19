@@ -4,9 +4,14 @@ import { Select, SelectAction, SelectContent, SelectGroup, SelectItem, SelectLab
 
 import React from 'react'
 
-const SelectComponent = () => {
+const SelectComponent = ({ onShippingChange }) => {
+
+    const handleSelect = (value) => {
+        onShippingChange(Number(value)); // Pass selected value to parent
+    };
+
     return (
-        <Select>
+        <Select onValueChange={handleSelect}>
             <SelectAction className="w-[20rem]">
                 <SelectValue placeholder="Select your option" />
             </SelectAction>

@@ -1,15 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import CartItem from '../components/cart/CartItem';
 import { calculateCartQty, calculateSubTotal, clearCart } from '../features/carts/cartSlice';
 import { Input } from 'keep-react';
 import SelectComponent from '../components/dropdown/SelectComponent';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
     const dispatch = useDispatch();
     const cartedItems = useSelector(state => state.cart.cartItems);
     const subTotal = useSelector(state => state.cart.cartTotalAmount);
     const cartQty = useSelector(state => state.cart.cartTotalQuantity);
+
+    const [shippingCost, setShippingCost] = useState(0);
+    const [promoDiscount, setPromoDiscount] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(calculateSubTotal());
@@ -18,8 +23,22 @@ const Cart = () => {
         dispatch(calculateCartQty());
     }, [cartedItems, dispatch]);
 
-    const totalPurchaseAmount = subTotal.toFixed(2) - 0.01;
+    const handleShippingChange = (value) => {
+        setShippingCost(value);
+    };
 
+    // Handle Promo Code Change
+    const handlePromoChange = (e) => {
+        const value = Number(e.target.value);
+        setPromoDiscount(value > 0 ? value : 0); // Ensure only positive values
+    };
+
+    // Calculate Total Cost
+    const totalCost = subTotal + shippingCost - promoDiscount;
+
+    const handleCheckout = () => {
+        navigate("/checkout");
+    };
     return (
         <>
             <div className="container mx-auto mt-10 dark:bg-gray-900">
@@ -63,19 +82,20 @@ const Cart = () => {
                         <div>
                             <label className="font-medium inline-block mb-3 text-sm uppercase dark:text-white">Shipping</label>
 
-                            <SelectComponent />
+                            <SelectComponent onShippingChange={handleShippingChange} />
                         </div>
-                        <div className="py-10">
+                        <div className="py-10 flex justify-between items-center">
                             <label htmlFor="promo" className="font-semibold inline-block mb-3 text-sm uppercase dark:text-white">Promo Code</label>
-                            <Input placeholder="Enter name" type="text" />
+                            <Input className='w-1/2' placeholder="Enter code" type="text" onChange={handlePromoChange} />
                         </div>
-                        <button className="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase">Apply</button>
+
                         <div className="border-t mt-8">
                             <div className="flex font-semibold justify-between py-6 text-sm uppercase dark:text-white">
                                 <span>Total cost</span>
-                                <span>${Number(subTotal)}</span>
+                                <span>${totalCost.toFixed(2)}</span>
                             </div>
-                            <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">Checkout</button>
+                            <button type="button"
+                                onClick={handleCheckout} className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">Checkout</button>
                         </div>
                     </div>
 
