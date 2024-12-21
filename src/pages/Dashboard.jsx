@@ -1,8 +1,12 @@
-import React from 'react'
+
+import CMSideBar from '../components/sidebar/CMSideBar'
 
 const Dashboard = () => {
     return (
-        <div>Dashboard</div>
+        <div className='flex gap-10'>
+            <CMSideBar />
+            gfgfg
+        </div>
     )
 }
 

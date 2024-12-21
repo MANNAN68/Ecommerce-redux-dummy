@@ -20,6 +20,7 @@ import user from '../../assets/user.png'
 import { Link } from 'react-router-dom'
 import useAuth from '../../hooks/useAuth';
 import { useSelector } from 'react-redux';
+import Logout from './Logout';
 
 
 const CSHeader = () => {
@@ -79,7 +80,7 @@ const CSHeader = () => {
                                     <DropdownItem>Profile</DropdownItem>
                                     <DropdownItem>Orders</DropdownItem>
                                     <DropdownItem>Review</DropdownItem>
-                                    <DropdownItem>Logout</DropdownItem>
+                                    <DropdownItem><Logout /></DropdownItem>
                                 </DropdownContent>
                             </Dropdown>
                         </NavbarList>

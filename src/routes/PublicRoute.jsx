@@ -1,14 +1,4 @@
-// import React from 'react'
-// import useAuth from '../hooks/useAuth'
-// import { Navigate } from 'react-router-dom';
 
-// const PublicRoute = ({ children }) => {
-
-//     const isLoggedIn = useAuth();
-//     return !isLoggedIn ? children : <Navigate to="/dashboard" />
-// }
-
-// export default PublicRoute
 
 import React from 'react';
 import useAuth from '../hooks/useAuth';
@@ -18,7 +8,7 @@ const PublicRoute = ({ children }) => {
     const isLoggedIn = useAuth();
     const location = useLocation();
 
-    const alwaysAccessibleRoutes = ["/", "/product", "/product/:id"];
+    const alwaysAccessibleRoutes = ["/", "/product", "/product/:id", "/checkout"];
 
     const isAccessible = alwaysAccessibleRoutes.some((path) => {
         const regex = new RegExp(`^${path.replace(":id", "\\d+")}$`);
