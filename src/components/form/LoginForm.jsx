@@ -2,26 +2,32 @@ import { useForm } from "react-hook-form";
 import Field from "./Field";
 import { useLoginMutation } from "../../features/auth/authApi";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Error from "../ui/Error";
 
 const LoginForm = () => {
     const [error, setError] = useState("");
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [login, { data, isLoading, error: responseError }] = useLoginMutation();
-    const navigate = useNavigate();
-    const location = useLocation();
 
-    const from = location.state?.from?.pathname;
 
     useEffect(() => {
         if (responseError?.data?.message) {
             setError(responseError.data.message);
         }
-        if (data?.accessToken) {
-            navigate(from, { replace: true });
-        }
-    }, [data, responseError, navigate, from]);
+
+    }, [data, responseError,]);
+
+    // const navigate = useNavigate();
+
+    // useEffect(() => {
+    //     if (responseError?.data?.message) {
+    //         setError(responseError.data.message);
+    //     }
+    //     if (data?.accessToken) {
+    //         navigate("/dashboard");
+    //     }
+    // }, [data, responseError, navigate]);
 
 
     const submitForm = async (formData) => {
@@ -31,6 +37,7 @@ const LoginForm = () => {
             console.error("Login failed:", error);
         }
     };
+
 
     return (
         <>
