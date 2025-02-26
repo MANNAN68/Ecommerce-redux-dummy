@@ -8,7 +8,7 @@ const PublicRoute = ({ children }) => {
     const isLoggedIn = useAuth();
     const location = useLocation();
 
-    const alwaysAccessibleRoutes = ["/", "/product", "/product/:id", "/checkout"];
+    const alwaysAccessibleRoutes = ["/", "/product", "/product/:id", "/cart"];
 
     const isAccessible = alwaysAccessibleRoutes.some((path) => {
         const regex = new RegExp(`^${path.replace(":id", "\\d+")}$`);
