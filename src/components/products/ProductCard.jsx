@@ -16,6 +16,8 @@ const ProductCard = ({ product = {} }) => {
         }
     }
 
+    console.log("mannan", product);
+
     return (
         <div className="group relative">
             <Link to={`/product/${product.id}`}>

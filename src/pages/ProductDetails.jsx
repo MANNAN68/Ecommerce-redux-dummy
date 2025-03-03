@@ -12,7 +12,7 @@ const ProductDetails = () => {
     const { data, isLoading, isError, error } = useGetSingleProductQuery(id);
     const [mainImage, setMainImage] = useState(null);
     const cartItems = useSelector(state => state.cart.cartItems);
-    const isInCart = cartItems.some(item => item.id === data.id);
+    const isInCart = cartItems.some(item => item.id === data?.id);
     useEffect(() => {
         if (data?.thumbnail) {
             setMainImage(data.thumbnail);

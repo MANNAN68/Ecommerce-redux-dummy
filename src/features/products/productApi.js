@@ -6,9 +6,9 @@ const productApi = apiSlice.injectEndpoints({
             query: () => '/products'
         }),
         getSingleProduct: builder.query({
-            query: (productId) => `/products/${productId}`
+            query: ({ page = 1, limit = 8 }) => `/products?page=${page}&limit=${limit}`
         })
     })
 });
 
-export const { useGetProductsQuery, useGetSingleProductQuery } = productApi;
+export const { useGetProductsQuery, useGetSingleProductQuery, useLazyGetProductsQuery } = productApi;
